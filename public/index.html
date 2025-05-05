@@ -7,14 +7,26 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: linear-gradient(135deg, #1e3a8a, #db2777);
+      background: linear-gradient(135deg, #7e22ce, #ec4899);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .menu-open aside {
+      transform: translateX(0);
+    }
+    .titulo-principal {
+      color: #3c1e70; /* roxo escuro bem visível */
     }
   </style>
 </head>
-<body class="text-white min-h-screen flex">
+<body class="text-white min-h-screen flex relative">
+  <!-- Botão de menu -->
+  <button onclick="toggleMenu()" class="fixed top-4 left-4 z-50 bg-black/70 p-2 rounded-md text-white hover:bg-black/90">
+    ☰ Menu
+  </button>
+
   <!-- Barra lateral -->
-  <aside class="w-64 bg-black/80 backdrop-blur-md p-6 flex flex-col items-start space-y-4 min-h-screen">
-    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Professora" class="w-20 h-20 rounded-full" />
+  <aside class="w-64 bg-black/70 backdrop-blur-md p-6 flex flex-col items-start space-y-4 min-h-screen fixed top-0 left-0 transform -translate-x-full transition-transform duration-300 z-40">
+    <img src="https://via.placeholder.com/80x80.png?text=HK" alt="Logo HK" class="w-20 h-20 rounded-full bg-white text-black font-bold flex items-center justify-center" />
     <h1 class="text-2xl font-bold text-pink-400">Prof. Hellen</h1>
     <nav class="flex flex-col gap-3 mt-6 w-full">
       <a href="#temas" class="hover:text-pink-300">📘 Temas</a>
@@ -24,23 +36,52 @@
   </aside>
 
   <!-- Conteúdo principal -->
-  <main class="flex-1 p-6">
+  <main class="flex-1 p-6 ml-0 md:ml-64">
     <!-- Temas de redação -->
     <section id="temas" class="mb-10">
-      <h2 class="text-2xl font-bold text-white mb-4">Temas disponíveis</h2>
+      <h2 class="text-2xl font-bold titulo-principal mb-4">Temas disponíveis</h2>
       <div class="grid gap-6 md:grid-cols-2">
+        <!-- Eixo: Educação -->
         <div class="bg-white/10 border border-white/30 rounded-xl p-4 shadow">
-          <h3 class="text-xl font-semibold text-pink-300 mb-2">Desafios e perspectivas da evasão escolar no Brasil</h3>
+          <h3 class="text-xl font-semibold text-pink-300 mb-2">EDUCAÇÃO</h3>
+          <p class="text-white font-semibold">Desafios e perspectivas da evasão escolar no Brasil</p>
           <p class="text-sm">+30 EXP • EDUCAÇÃO</p>
           <a href="pdfs/desafios-evasao-escolar.pdf" target="_blank" class="text-pink-200 underline text-sm block mt-2">📄 Ver textos motivadores (PDF)</a>
           <button onclick="selecionarTema('Desafios e perspectivas da evasão escolar no Brasil')" class="mt-3 bg-pink-600 px-4 py-2 rounded hover:bg-pink-700">Selecionar tema</button>
+        </div>
+
+        <!-- Eixo: Saúde -->
+        <div class="bg-white/10 border border-white/30 rounded-xl p-4 shadow">
+          <h3 class="text-xl font-semibold text-pink-300 mb-2">SAÚDE</h3>
+          <p class="text-white font-semibold">A influência das redes sociais na saúde mental dos jovens</p>
+          <p class="text-sm">+30 EXP • SAÚDE</p>
+          <a href="pdfs/saude-mental-redes.pdf" target="_blank" class="text-pink-200 underline text-sm block mt-2">📄 Ver textos motivadores (PDF)</a>
+          <button onclick="selecionarTema('A influência das redes sociais na saúde mental dos jovens')" class="mt-3 bg-pink-600 px-4 py-2 rounded hover:bg-pink-700">Selecionar tema</button>
+        </div>
+
+        <!-- Eixo: Sociedade -->
+        <div class="bg-white/10 border border-white/30 rounded-xl p-4 shadow">
+          <h3 class="text-xl font-semibold text-pink-300 mb-2">SOCIEDADE</h3>
+          <p class="text-white font-semibold">A cultura do cancelamento e seus efeitos na convivência social</p>
+          <p class="text-sm">+30 EXP • SOCIEDADE</p>
+          <a href="pdfs/cancelamento.pdf" target="_blank" class="text-pink-200 underline text-sm block mt-2">📄 Ver textos motivadores (PDF)</a>
+          <button onclick="selecionarTema('A cultura do cancelamento e seus efeitos na convivência social')" class="mt-3 bg-pink-600 px-4 py-2 rounded hover:bg-pink-700">Selecionar tema</button>
+        </div>
+
+        <!-- Eixo: Economia -->
+        <div class="bg-white/10 border border-white/30 rounded-xl p-4 shadow">
+          <h3 class="text-xl font-semibold text-pink-300 mb-2">ECONOMIA</h3>
+          <p class="text-white font-semibold">O impacto do desemprego na juventude brasileira</p>
+          <p class="text-sm">+30 EXP • ECONOMIA</p>
+          <a href="pdfs/desemprego-juventude.pdf" target="_blank" class="text-pink-200 underline text-sm block mt-2">📄 Ver textos motivadores (PDF)</a>
+          <button onclick="selecionarTema('O impacto do desemprego na juventude brasileira')" class="mt-3 bg-pink-600 px-4 py-2 rounded hover:bg-pink-700">Selecionar tema</button>
         </div>
       </div>
     </section>
 
     <!-- Formulário de envio -->
     <section id="form" class="bg-white/10 backdrop-blur-md shadow-md rounded-xl p-6">
-      <h2 class="text-xl font-bold text-white mb-4">Enviar redação</h2>
+      <h2 class="text-xl font-bold titulo-principal mb-4">Enviar redação</h2>
       <form action="/enviar" method="POST" enctype="multipart/form-data">
         <label class="block mb-2 font-semibold">Seu nome:</label>
         <input name="nome" type="text" class="w-full border border-pink-400 p-2 rounded mb-4 bg-white text-black" required />
@@ -90,6 +131,10 @@
         campoTexto.classList.add('hidden');
         campoArquivo.classList.remove('hidden');
       }
+    }
+
+    function toggleMenu() {
+      document.body.classList.toggle('menu-open');
     }
   </script>
 </body>
